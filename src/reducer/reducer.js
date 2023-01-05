@@ -1,6 +1,6 @@
 const initialState = {
     jsonData: [],
-    tabs: ""
+    tabs: 0
 }
 
 const Reducer = (state = initialState, action) => {
@@ -9,8 +9,10 @@ const Reducer = (state = initialState, action) => {
             return { ...initialState, jsonData: [...state.jsonData, action.payload], tabs: state.tabs };
 
         case 'TAB_UPDATE':
-            console.log(action.payload)
-            return { ...initialState, jsonData: [...state.jsonData], tabs: action.payload };
+            return { ...initialState, jsonData: [...state.jsonData], tabs: state.tabs - (action.payload * -1) };
+
+        case 'RESET':
+            return { ...initialState, jsonData: [...state.jsonData], tabs: 0 };
 
         default:
             return { ...initialState, state }
